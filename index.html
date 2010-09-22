@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Language" content="en" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta http-equiv="Content-Script-Type" content="text/javascript" />
+    <title>Life is Haskell</title>
+    <!--[if IE]><script type="text/javascript" src="excanvas.js"></script><![endif]-->
+    <script type="text/javascript" src="jquery-1.4.2.min.js"></script>
+    <style type="text/css">
+      body {background-color: #000000}
+      h1 {color: #FFFFFF}
+      a {color: #FFFFFF}
+    </style>
+  </head>
+  <body>
+    <h1>Life is Haskell</h1>
+    <script type="text/javascript">
+      <!--
+        var width = 80;
+        var height = 40;
+        var interval = 0.5 * 1000;
+
+        function start() {
+          $.get("Life.cgi", function(data) {
+            var hash = eval("(" + data + ")");
+            var id = hash["id"];
+            setInterval(function() {
+              $.get("Life.cgi?id=" + id + "&w=" + width + "&h=" + height,
+                function(data) {
+                  var hash = eval("(" + data + ")");
+                  var cells = hash["cells"];
+                  drawLife(cells);
+                });
+            }, interval);
+          });
+        }
+
+        function drawLife(cells) {
+          var canvas = document.getElementById("life");
+          if ( ! canvas || ! canvas.getContext ) {
+            return false;
+          }
+          var ctx = canvas.getContext('2d');
+
+          ctx.fillStyle = "rgb(0, 0, 0)";
+          ctx.fillRect(0, 0, 800, 400);
+
+          for (var y = 0; y < 40; y++) {
+            for (var x = 0; x < 80; x++) {
+              state = cells[y][x];
+              drawCell(ctx, x, y, state);
+            }
+          }
+        }
+
+        function drawCell(ctx, x, y, state) {
+          if (state == 0) {
+            ctx.fillStyle = "rgb(0, 0, 0)";
+          } else {
+            ctx.fillStyle = "rgb(0, 250, 250)";
+          }
+          ctx.fillRect(x * 10, y * 10, 8, 8);
+        }
+      //-->
+    </script>
+    <p><a href="#" onclick="start();return false;">Start</a></p>
+    <canvas id="life" width="800" height="400"></canvas>
+  </body>
+</html>

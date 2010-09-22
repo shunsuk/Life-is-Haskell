@@ -1,0 +1,47 @@
+= Life is Haskell
+
+  Created by: shunsuk - http://shunsuk.blogspot.com/
+  Version: 1.0
+  Contact: http://twitter.com/shunsuk_jp/
+
+Haskell implementation of Conway's Game of Life
+Client / Server System:
+  Client - HTML5 & JavaScript
+  Server - Haskell CGI
+
+
+== Requirements
+
+* GHC 6.10.3
+
+
+== Installation
+
+1. ghc --make Life.hs -o Life.cgi
+
+2. chmod 777 Life.cgi
+
+3. mkdir data
+
+4. chmod 777 data
+
+
+== How to use
+
+Web Interface:
+Access index.html and click [Start].
+
+CUI:
+runghc LifeTest.hs
+
+
+== History
+
+Version: 1.0 (2010-09-22)
+  first release
+
+
+== Todo
+
+* 
+

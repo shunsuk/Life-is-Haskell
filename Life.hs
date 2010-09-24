@@ -60,9 +60,10 @@ cgiMain = do
          exist <- lift $ fileExist ("./data/" ++ id)
          if exist
             then do css <- lift $ readCells id
-                    lift $ writeCells id $ nextGeneration css
+                    css' <- lift $ nextGeneration css
+                    lift $ writeCells id css'
                     output $ jsonCells id css
-            else do css <- lift $ initLife width height
+            else do css <- lift $ initLife (width, height)
                     lift $ writeCells id css
                     output $ jsonCells id css
 
